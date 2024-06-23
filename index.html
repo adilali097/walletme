@@ -94,59 +94,64 @@
             </tbody>
         </table>
     </div>
-    <script>
-        const assets = [
-            "Bitcoin (BTC)", "Ethereum (ETH)", "Binance Coin (BNB)", "Cardano (ADA)", "Solana (SOL)",
-            "XRP (XRP)", "Polkadot (DOT)", "Dogecoin (DOGE)", "Avalanche (AVAX)", "Chainlink (LINK)",
-            "Litecoin (LTC)", "Stellar (XLM)", "Bitcoin Cash (BCH)", "Terra (LUNA)", "Uniswap (UNI)",
-            "Polygon (MATIC)", "Algorand (ALGO)", "VeChain (VET)", "Filecoin (FIL)", "TRON (TRX)",
-            "Monero (XMR)", "Cosmos (ATOM)", "Tezos (XTZ)", "Aave (AAVE)", "EOS (EOS)", "Neo (NEO)",
-            "Dash (DASH)", "Zcash (ZEC)", "Maker (MKR)", "Compound (COMP)", "Bitcoin SV (BSV)",
-            "Kusama (KSM)", "IOTA (MIOTA)", "Waves (WAVES)", "Synthetix (SNX)", "Huobi Token (HT)",
-            "Ethereum Classic (ETC)", "The Graph (GRT)", "SushiSwap (SUSHI)", "THETA (THETA)",
-            "PancakeSwap (CAKE)", "Fantom (FTM)", "Decred (DCR)", "Ontology (ONT)", "Curve DAO Token (CRV)",
-            "0x (ZRX)", "Chiliz (CHZ)", "Ren (REN)", "Basic Attention Token (BAT)", "Enjin Coin (ENJ)",
-            
-        ];
+   <script>
+    // Array of assets
+    const assets = [
+        "Bitcoin (BTC)", "Ethereum (ETH)", "Binance Coin (BNB)", "Cardano (ADA)", "Solana (SOL)",
+        "XRP (XRP)", "Polkadot (DOT)", "Dogecoin (DOGE)", "Avalanche (AVAX)", "Chainlink (LINK)",
+        "Litecoin (LTC)", "Stellar (XLM)", "Bitcoin Cash (BCH)", "Terra (LUNA)", "Uniswap (UNI)",
+        "Polygon (MATIC)", "Algorand (ALGO)", "VeChain (VET)", "Filecoin (FIL)", "TRON (TRX)",
+        "Monero (XMR)", "Cosmos (ATOM)", "Tezos (XTZ)", "Aave (AAVE)", "EOS (EOS)", "Neo (NEO)",
+        "Dash (DASH)", "Zcash (ZEC)", "Maker (MKR)", "Compound (COMP)", "Bitcoin SV (BSV)",
+        "Kusama (KSM)", "IOTA (MIOTA)", "Waves (WAVES)", "Synthetix (SNX)", "Huobi Token (HT)",
+        "Ethereum Classic (ETC)", "The Graph (GRT)", "SushiSwap (SUSHI)", "THETA (THETA)",
+        "PancakeSwap (CAKE)", "Fantom (FTM)", "Decred (DCR)", "Ontology (ONT)", "Curve DAO Token (CRV)",
+        "0x (ZRX)", "Chiliz (CHZ)", "Ren (REN)", "Basic Attention Token (BAT)", "Enjin Coin (ENJ)"
+    ];
 
-        function generateRandomData() {
-            const randomAsset = assets[Math.floor(Math.random() * assets.length)];
-            const lastPrice = (Math.random() * 1000).toFixed(2);
-            const change = (Math.random() - 0.5) * 20;
-            const percentChange = ((change / lastPrice) * 100).toFixed(2);
+    // Function to generate random market data
+    function generateRandomData() {
+        const randomAsset = assets[Math.floor(Math.random() * assets.length)];
+        const lastPrice = (Math.random() * 1000).toFixed(2);
+        const change = (Math.random() - 0.5) * 20;
+        const percentChange = ((change / lastPrice) * 100).toFixed(2);
 
-            return {
-                asset: randomAsset,
-                lastPrice: parseFloat(lastPrice),
-                change: parseFloat(change.toFixed(2)),
-                percentChange: parseFloat(percentChange)
-            };
+        return {
+            asset: randomAsset,
+            lastPrice: parseFloat(lastPrice),
+            change: parseFloat(change.toFixed(2)),
+            percentChange: parseFloat(percentChange)
+        };
+    }
+
+    // Function to populate market data table
+    function populateMarketData() {
+        const dataBody = document.getElementById('dataBody');
+        dataBody.innerHTML = '';
+
+        for (let i = 0; i < 10; i++) {
+            const randomData = generateRandomData();
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${randomData.asset}</td>
+                <td>$${randomData.lastPrice.toFixed(2)}</td>
+                <td>${randomData.change.toFixed(2)}</td>
+                <td>${randomData.percentChange.toFixed(2)}%</td>
+            `;
+            dataBody.appendChild(row);
         }
+    }
 
-        function populateMarketData() {
-            const dataBody = document.getElementById('dataBody');
-            dataBody.innerHTML = '';
+    // Function to update market data periodically
+    function updateMarketData() {
+        populateMarketData(); // Initial population
+        setInterval(populateMarketData, 60000); // Update every minute (60000 milliseconds)
+    }
 
-            for (let i = 0; i < 10; i++) {
-                const randomData = generateRandomData();
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${randomData.asset}</td>
-                    <td>$${randomData.lastPrice.toFixed(2)}</td>
-                    <td>${randomData.change.toFixed(2)}</td>
-                    <td>${randomData.percentChange.toFixed(2)}%</td>
-                `;
-                dataBody.appendChild(row);
-            }
-        }
+    // Start updating market data when DOM content is loaded
+    document.addEventListener('DOMContentLoaded', updateMarketData);
+</script>
 
-        function updateMarketData() {
-            populateMarketData();
-            setInterval(populateMarketData, 60000); // Update every minute (60000 milliseconds)
-        }
-
-        document.addEventListener('DOMContentLoaded', updateMarketData);
-    </script>
     <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="muhammedadan" data-description="Support me on Buy me a coffee!" data-message="Thank you Traders Make Profit with Us" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script> 
 </body>
 </html>
