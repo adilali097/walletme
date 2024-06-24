@@ -94,7 +94,7 @@
             </tbody>
         </table>
     </div>
-   <script>
+    <script>
     // Array of assets
     const assets = [
         "Bitcoin (BTC)", "Ethereum (ETH)", "Binance Coin (BNB)", "Cardano (ADA)", "Solana (SOL)",
@@ -110,14 +110,13 @@
     ];
 
     // Function to generate random market data
-    function generateRandomData() {
-        const randomAsset = assets[Math.floor(Math.random() * assets.length)];
+    function generateRandomData(asset) {
         const lastPrice = (Math.random() * 1000).toFixed(2);
         const change = (Math.random() - 0.5) * 20;
         const percentChange = ((change / lastPrice) * 100).toFixed(2);
 
         return {
-            asset: randomAsset,
+            asset: asset,
             lastPrice: parseFloat(lastPrice),
             change: parseFloat(change.toFixed(2)),
             percentChange: parseFloat(percentChange)
@@ -129,8 +128,10 @@
         const dataBody = document.getElementById('dataBody');
         dataBody.innerHTML = '';
 
-        for (let i = 0; i < 10; i++) {
-            const randomData = generateRandomData();
+        const randomAssets = assets.sort(() => 0.5 - Math.random()).slice(0, 10); // Randomly select 10 assets
+
+        randomAssets.forEach(asset => {
+            const randomData = generateRandomData(asset);
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${randomData.asset}</td>
@@ -139,20 +140,19 @@
                 <td>${randomData.percentChange.toFixed(2)}%</td>
             `;
             dataBody.appendChild(row);
-        }
+        });
     }
 
     // Function to update market data periodically
     function updateMarketData() {
         populateMarketData(); // Initial population
-        setInterval(populateMarketData, 60000); // Update every minute (60000 milliseconds)
+        setInterval(populateMarketData, 1000); // Update every second (1000 milliseconds)
     }
 
     // Start updating market data when DOM content is loaded
     document.addEventListener('DOMContentLoaded', updateMarketData);
-</script>
+    </script>
 
     <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="muhammedadan" data-description="Support me on Buy me a coffee!" data-message="Thank you Traders Make Profit with Us" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script> 
 </body>
 </html>
-
