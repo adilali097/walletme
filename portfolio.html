@@ -125,20 +125,21 @@
                 My Portfolio
             </div>
             <div class="card-body">
-                <table id="portfolioTable" class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Cryptocurrency</th>
-                            <th>Quantity</th>
-                            <th>Price (USD)</th>
-                            <th>Value (USD)</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Portfolio data will be dynamically added here -->
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table id="portfolioTable" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Cryptocurrency</th>
+                                <th>Quantity</th>
+                                <th>Price (USD)</th>
+                                <th>Value (USD)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Portfolio data will be dynamically added here -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -199,7 +200,6 @@
                     '<td>' + quantity + '</td>' +
                     '<td>$' + price.toFixed(2) + '</td>' +
                     '<td>$' + value.toFixed(2) + '</td>' +
-                    '<td><button class="btn btn-danger btn-sm delete-btn">Delete</button></td>' +
                     '</tr>';
                 $('#portfolioTable tbody').append(newRow);
 
@@ -213,11 +213,6 @@
 
                 var symbol = $('#cryptoSymbol').val().toUpperCase();
                 fetchCryptoData(symbol);
-            });
-
-            // Event listener for delete button
-            $('#portfolioTable').on('click', '.delete-btn', function () {
-                $(this).closest('tr').remove();
             });
         });
     </script>
